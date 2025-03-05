@@ -1,21 +1,30 @@
 class Solution {
 public:
     bool isPathCrossing(string path) {
-        std::unordered_set<string> visited;
-        int x = 0, y = 0;
-        visited.insert("0,0"); // Start position
-
-        for (char dir : path) {
-            if (dir == 'N') y++;
-            else if (dir == 'S') y--;
-            else if (dir == 'E') x++;
-            else if (dir == 'W') x--;
-
-            string pos = to_string(x) + "," + to_string(y);
-            if (visited.count(pos)) {
-                return true; 
+        int x = 0;
+        int y = 0;
+        set<pair<int, int>> st;
+        st.insert({0,0});
+        int n = path.size();
+        for(int i =0;i<n;i++){
+            if(path[i]=='S'){
+                y--;
             }
-            visited.insert(pos);
+            else if(path[i]=='E'){
+                x++;
+            }
+            else if(path[i]=='W'){
+                x--;
+            }
+            else if(path[i]=='N'){
+                y++;
+            }
+            if(st.count({x,y})){
+                return true;
+            }
+            
+                st.insert({x,y});
+            
         }
         return false;
     }
