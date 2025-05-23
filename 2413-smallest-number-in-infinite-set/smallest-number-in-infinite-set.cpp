@@ -1,7 +1,7 @@
 class SmallestInfiniteSet {
 public:
     priority_queue<int, vector<int>, greater<int>> q;
-    set<int> st;
+    unordered_set<int> st;
     SmallestInfiniteSet() {
 
         for (int i = 1; i <= 1000; i++) {
@@ -12,8 +12,8 @@ public:
 
     int popSmallest() {
         if (!q.empty()) {
-            st.erase(st.begin()); 
             int smallest = q.top();
+            st.erase(smallest); 
             q.pop();
             return smallest;
         }
