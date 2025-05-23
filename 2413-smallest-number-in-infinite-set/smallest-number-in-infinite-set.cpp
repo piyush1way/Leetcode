@@ -2,12 +2,9 @@ class SmallestInfiniteSet {
 public:
     priority_queue<int, vector<int>, greater<int>> q;
     unordered_set<int> st;
+    int next;
     SmallestInfiniteSet() {
-
-        for (int i = 1; i <= 1000; i++) {
-            q.push(i);
-            st.insert(i);
-        }
+        next = 1;
     }
 
     int popSmallest() {
@@ -17,11 +14,11 @@ public:
             q.pop();
             return smallest;
         }
-        return -1;
+        return next++;
     }
 
     void addBack(int num) {
-        if (st.count(num) == 0) {
+        if(num<next && st.find(num)==st.end()){
             q.push(num);
             st.insert(num);
         }
